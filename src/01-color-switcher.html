@@ -10,18 +10,20 @@
     <button type="button" data-stop onclick="stopColorChange()">Stop</button>
 
     <script>
-      let intervalId;
+      const startButton = document.querySelector('[data-start]');
+      const stopButton = document.querySelector('[data-stop]');
 
-      function getRandomHexColor() {
-        return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-      }
+      // Start changing background color every second
+      let intervalId = setInterval(() => {
+        document.body.style.backgroundColor = getRandomHexColor();
+      }, 1000);
 
       function startColorChange() {
         // Disable the start button
-        document.querySelector("[data-start]").disabled = true;
+        startButton.disabled = true;
 
         // Enable the stop button
-        document.querySelector("[data-stop]").disabled = false;
+        stopButton.disabled = false;
 
         // Start changing background color every second
         intervalId = setInterval(() => {
@@ -31,16 +33,21 @@
 
       function stopColorChange() {
         // Enable the start button
-        document.querySelector("[data-start]").disabled = false;
+        startButton.disabled = false;
 
         // Disable the stop button
-        document.querySelector("[data-stop]").disabled = true;
+        stopButton.disabled = true;
 
         // Stop changing background color
         clearInterval(intervalId);
 
         // Reset background color
-        document.body.style.backgroundColor = "";
+        document.body.style.backgroundColor = '';
+      }
+
+      // Function to generate a random hex color
+      function getRandomHexColor() {
+        return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
       }
     </script>
   </body>
